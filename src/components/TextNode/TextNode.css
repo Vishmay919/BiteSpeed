@@ -1,0 +1,25 @@
+/* src/components/TextNode/TextNode.css */
+.text-node {
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 5px;
+    background-color: white;
+    transition: box-shadow 0.3s ease;
+    font-size: 12px;
+  }
+  
+  .text-node:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .node-content {
+    padding: 4px 8px;
+  }
+  
+  .node-header {
+    font-size: 6px;
+    background-color: black;
+    color: white;
+    border-radius: 5px 5px 0 0;
+    padding: 2px 4px;
+    margin: 0;
+  }
