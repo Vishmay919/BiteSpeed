@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Chatbot Flow Builder
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the Chatbot Flow Builder project! This project demonstrates a simple yet extensible chatbot flow builder built using React and React Flow. The flow builder allows users to create and connect different types of nodes, forming a flow that determines the order of execution for a chatbot.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+1. **Text Node**: 
+   - Supports multiple text nodes in a single flow.
+   - Nodes are added via buttons in the Nodes Panel.
 
-### `npm start`
+2. **Image Node**:
+   - Includes an image node with a default link.
+   - Easily extendable to add more types of nodes.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. **Nodes Panel**:
+   - Houses all node types supported by the Flow Builder.
+   - Designed to be extensible for adding new node types in the future.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+4. **Settings Panel**:
+   - Appears when a node is selected.
+   - Allows users to edit the properties of the selected node.
+   - Includes functionality to delete nodes.
 
-### `npm test`
+5. **Edge**:
+   - Connects two nodes together.
+   - Ensures each node has only one outgoing connection.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+6. **Save Button**:
+   - Saves the current flow to local storage.
+   - Displays an error if more than one node has no target handle.
+   - Shows a success message upon successful save.
 
-### `npm run build`
+7. **Persistent State**:
+   - Loads the saved flow from local storage upon refresh.
+   - Ensures that the user's work is not lost between sessions.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Extensibility
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The project is designed with extensibility in mind. The code is structured to easily add new node types. Currently, there are two types of nodes: text and image nodes. The addition of these nodes is managed through utility functions that can be easily extended to include new node types.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Example of Adding a New Node Type:
 
-### `npm run eject`
+```javascript
+export const createCustomNode = () => ({
+  id: uuidv4(),
+  type: 'customNode',
+  position: { x: 250, y: 5 },
+  data: { label: 'New Custom Node' },
+});
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## UX Improvement
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+A notable UX improvement made during the development was the addition of a delete functionality for nodes. This feature, though not explicitly mentioned in the requirements, was implemented to enhance the user experience by allowing users to remove accidentally added nodes.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Code Structure and Decisions
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Code Organization
 
-## Learn More
+- **FlowBuilder Component**:
+  - Manages the overall flow and interaction with React Flow.
+  - Handles node addition, deletion, and selection.
+  - Saves the flow state to local storage and loads it upon initialization.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **NodesPanel Component**:
+  - Displays available node types.
+  - Facilitates the addition of new nodes.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **SettingsPanel Component**:
+  - Displays settings for the selected node.
+  - Allows editing of node properties and deletion.
 
-### Code Splitting
+- **Utility Functions**:
+  - Functions for creating different node types.
+  - Ensures consistent structure and default values for nodes.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Other Features
 
-### Analyzing the Bundle Size
+1. **Local Storage**:
+   - Saves the current flow to local storage to persist data across sessions.
+   - Ensures that users do not lose their work upon refreshing the page.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. **React Toastify**:
+   - Provides user feedback through toast notifications.
+   - Enhances user experience by displaying success and error messages.
